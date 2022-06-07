@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">MyStore</string>
+    <string name="home">Home</string>
+    <string name="detail">Detail</string>
+    <string name="cart">Cart</string>
+    <string name="favorites">Favorites</string>
+    <string name="pay">Pay</string>
+    <string name="favorite_count">%s favorites</string>
+    <string name="product_count">%s products</string>
+    <string name="open_left_drawer_desc">Open Left Drawer</string>
+    <string name="go_back_button_desc">Go back button</string>
+    <string name="options_menu_desc">Options menu</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="added_to_cart">Added to cart</string>
+    <string name="add_to_favorites">Add to favorites</string>
+    <string name="added_to_favorites">Added to favorites</string>
+    <string name="product_image">Product image</string>
+    <string name="pay_with_paypal">Pay with Paypal</string>
+    <string name="pay_with_moncash">Pay with MonCash</string>
+    <string name="pay_with_card">Pay with Credit/Debit Card</string>
+
+    <string name="all_categories">All categories</string>
+    <string name="electronics">Electronics</string>
+    <string name="jewelery">Jewelery</string>
+    <string name="men_clothing">Men\'s clothing</string>
+    <string name="women_clothing">Women\'s clothing</string>
+</resources>
