@@ -10,7 +10,6 @@ import com.germainkevin.mystore.data.Product
 import com.germainkevin.mystore.data.repository.ProductListCategory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import timber.log.Timber
 
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -24,12 +23,10 @@ class PersistentStorage(private val context: Context) {
     suspend fun setUsingDynamicThemeState(value: Boolean) {
         context.dataStore.edit { settings ->
             settings[IS_USING_DYNAMIC_THEME] = value
-            Timber.d("IS_USING_DYNAMIC_THEME: ${settings[IS_USING_DYNAMIC_THEME]}")
         }
     }
 
     val isUsingDynamicTheme: Flow<Boolean> = context.dataStore.data.map { preferences ->
-        Timber.d("IS_USING_DYNAMIC_THEME: ${preferences[IS_USING_DYNAMIC_THEME]}")
         // No type safety.
         preferences[IS_USING_DYNAMIC_THEME] ?: false
     }

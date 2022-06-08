@@ -25,10 +25,12 @@ import com.germainkevin.mystore.ui.settings.SettingsScreen
 import com.germainkevin.mystore.ui.theme.MyStoreTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     @Inject
     lateinit var persistentStorage: PersistentStorage
 
@@ -38,7 +40,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             val isUsingDynamicTheme =
                 persistentStorage.isUsingDynamicTheme.collectAsState(initial = false)
+            Timber.d("dynamicThemeState: isUsingDynamicTheme: ${isUsingDynamicTheme.value}")
             val dynamicThemeState = remember { mutableStateOf(isUsingDynamicTheme.value) }
+            Timber.d("dynamicThemeState: ${dynamicThemeState.value}")
             MyStoreTheme(dynamicColor = dynamicThemeState.value) {
                 val navController = rememberNavController()
                 val navActions = remember(navController) { NavActions(navController) }

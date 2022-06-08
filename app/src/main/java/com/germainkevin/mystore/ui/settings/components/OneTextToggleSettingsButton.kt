@@ -2,10 +2,7 @@ package com.germainkevin.mystore.ui.settings.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.Switch
 import androidx.compose.material.SwitchDefaults
@@ -29,13 +26,13 @@ fun OneTextToggleSettingsButton(
     title: String,
     state: State<Boolean>,
     hasDivider: Boolean,
-    doOnClick: () -> Unit
+    onCheckedChange: () -> Unit
 ) {
     Column(
         modifier = Modifier
-            .wrapContentSize()
+            .fillMaxWidth()
             .background(MaterialTheme.colorScheme.surface)
-            .clickable { doOnClick() },
+            .clickable { onCheckedChange() },
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
@@ -54,8 +51,7 @@ fun OneTextToggleSettingsButton(
                     checkedThumbColor = MaterialTheme.colorScheme.primary
                 ),
                 checked = state.value, onCheckedChange = {
-                    doOnClick()
-                    // Do not put doOnClick() here, it will do the opposite of the above code
+                    onCheckedChange()
                 })
         }
         if (hasDivider) Divider(modifier = Modifier.padding(horizontal = 16.dp))

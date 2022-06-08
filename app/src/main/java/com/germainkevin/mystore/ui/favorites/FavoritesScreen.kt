@@ -66,11 +66,15 @@ fun FavoritesScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
+                        .background(color = MaterialTheme.colorScheme.background)
                         .padding(contentPadding),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(text = stringResource(id = R.string.no_cart_products))
+                    Text(
+                        text = stringResource(id = R.string.no_cart_products),
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
                 }
             } else {
                 LazyColumn(

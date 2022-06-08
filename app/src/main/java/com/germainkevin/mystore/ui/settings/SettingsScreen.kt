@@ -22,6 +22,8 @@ import com.germainkevin.mystore.ui.settings.components.SettingsTopBar
 import com.germainkevin.mystore.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 @Composable
@@ -56,12 +58,10 @@ fun SettingsScreen(
                     title = stringResource(id = R.string.use_dynamic_theme),
                     state = dynamicThemeState,
                     hasDivider = true,
-                    doOnClick = {
+                    onCheckedChange = {
                         dynamicThemeState.value = !dynamicThemeState.value
                         coroutineScope.launch(Dispatchers.IO) {
-                            persistentStorage.setUsingDynamicThemeState(
-                                dynamicThemeState.value
-                            )
+                            persistentStorage.setUsingDynamicThemeState(dynamicThemeState.value)
                         }
                     }
                 )
