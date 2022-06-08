@@ -8,6 +8,7 @@ object NavRoutes {
     const val CART = "Cart"
     const val FAVORITES = "Favorites"
     const val PAY = "Pay"
+    const val SETTINGS = "Settings"
 }
 
 /**
@@ -35,5 +36,9 @@ class NavActions(private val navHostController: NavHostController) {
 
     var navigateToPaySection: () -> Unit = {
         navController.navigate(NavRoutes.PAY)
+    }
+
+    var navigateToSettings: () -> Unit = {
+        navController.navigate(NavRoutes.SETTINGS)
     }
 }

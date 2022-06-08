@@ -27,4 +27,5 @@
     <string name="men_clothing">Men\'s clothing</string>
     <string name="women_clothing">Women\'s clothing</string>
     <string name="remove_from_favorites">Remove from favorites</string>
+    <string name="action_settings">Settings</string>
 </resources>

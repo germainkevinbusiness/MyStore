@@ -47,7 +47,6 @@ fun CartScreen(
         topBar = {
             CartTopAppBar(
                 itemsInCart = addedToCartProducts,
-                navActions,
                 openLeftDrawer,
                 scrollBehavior,
             )

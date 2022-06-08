@@ -24,6 +24,7 @@ import com.germainkevin.mystore.ui.detail.DetailScreen
 import com.germainkevin.mystore.ui.favorites.FavoritesScreen
 import com.germainkevin.mystore.ui.home.HomeScreen
 import com.germainkevin.mystore.ui.pay.PayScreen
+import com.germainkevin.mystore.ui.settings.SettingsScreen
 import com.germainkevin.mystore.ui.theme.MyStoreTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -99,6 +100,9 @@ private fun MainScreen(navActions: NavActions, coroutineScope: CoroutineScope) {
 
             composable(NavRoutes.PAY) {
                 PayScreen(navActions)
+            }
+            composable(NavRoutes.SETTINGS) {
+                SettingsScreen(navActions = navActions)
             }
         }
     }
