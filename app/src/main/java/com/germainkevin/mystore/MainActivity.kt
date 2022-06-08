@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            MyStoreTheme {
+            MyStoreTheme(dynamicColor = false) {
                 val navController = rememberNavController()
                 val navActions = remember(navController) { NavActions(navController) }
                 val coroutineScope = rememberCoroutineScope()

@@ -2,8 +2,8 @@ package com.germainkevin.mystore.data.repository
 
 import com.germainkevin.mystore.data.Product
 import com.germainkevin.mystore.data.ProductDao
-import com.germainkevin.mystore.getProductsByCategory
 import com.germainkevin.mystore.data.api.FakeStoreApi
+import com.germainkevin.mystore.getProductsByCategory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -56,12 +56,12 @@ class ProductsRepositoryImpl @Inject constructor(
     override fun updateProduct(
         coroutineScope: CoroutineScope,
         product: Product,
-        result: () -> Unit
+        onProductUpdated: () -> Unit
     ) {
         val job = coroutineScope.launch(Dispatchers.IO) {
             productDao.insertProduct(product)
         }
-        if (job.isCompleted) result()
+        if (job.isCompleted) onProductUpdated()
     }
 
     override fun getProductById(

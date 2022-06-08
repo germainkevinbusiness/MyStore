@@ -2,9 +2,16 @@ package com.germainkevin.mystore.ui.favorites.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddShoppingCart
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -24,6 +31,7 @@ import com.germainkevin.mystore.R
 fun FavoriteProductItem(
     modifier: Modifier = Modifier,
     product: Product,
+    removeFromFavorites: (Product) -> Unit
 ) {
     Card(
         modifier = modifier,
@@ -67,6 +75,30 @@ fun FavoriteProductItem(
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
             )
+            Row(
+                modifier = Modifier
+                    .padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 8.dp)
+            ) {
+                OutlinedButton(
+                    onClick = { removeFromFavorites(product.copy(addedAsFavorite = false)) },
+                    modifier = Modifier
+                        .padding(end = 8.dp)
+                        .weight(1f),
+                    shape = RoundedCornerShape(10)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Remove,
+                        contentDescription = stringResource(id = R.string.remove_from_favorites)
+                                + " icon",
+                        modifier = Modifier.padding(end = 4.dp)
+                    )
+                    Text(
+                        text = stringResource(id = R.string.remove_from_favorites),
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
         }
     }
 }

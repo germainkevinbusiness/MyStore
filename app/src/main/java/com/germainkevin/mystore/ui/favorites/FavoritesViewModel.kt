@@ -34,6 +34,12 @@ class FavoritesViewModel @Inject constructor(private val repository: ProductsRep
         }
     }
 
+    fun updateProduct(product: Product) {
+        repository.updateProduct(viewModelScope, product = product) {
+            getProducts()
+        }
+    }
+
     init {
         getProducts()
     }

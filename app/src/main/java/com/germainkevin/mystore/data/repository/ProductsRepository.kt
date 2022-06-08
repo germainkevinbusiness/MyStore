@@ -25,7 +25,11 @@ interface ProductsRepository {
     /**
      * @param coroutineScope A coroutine to launch asynchronous calls on
      * @param product The product we will add to the database as an update
-     * @param result Callback for When we're done updating that product in the database
+     * @param onProductUpdated Callback for When we're done updating that product in the database
      * */
-    fun updateProduct(coroutineScope: CoroutineScope, product: Product, result: () -> Unit)
+    fun updateProduct(
+        coroutineScope: CoroutineScope,
+        product: Product,
+        onProductUpdated: () -> Unit
+    )
 }

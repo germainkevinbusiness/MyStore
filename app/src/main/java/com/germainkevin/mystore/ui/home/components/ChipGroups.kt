@@ -4,7 +4,7 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -20,6 +20,13 @@ import com.germainkevin.mystore.ui.home.HomeViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChipGroups(homeScreenState: State<HomeScreenState>, homeViewModel: HomeViewModel) {
+    val categoriesMap = mapOf(
+        ProductListCategory.AllCategories to stringResource(id = R.string.all_categories),
+        ProductListCategory.Electronics to stringResource(id = R.string.electronics),
+        ProductListCategory.Jewelery to stringResource(id = R.string.jewelery),
+        ProductListCategory.MenClothing to stringResource(id = R.string.men_clothing),
+        ProductListCategory.WomenClothing to stringResource(id = R.string.women_clothing)
+    )
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -28,70 +35,16 @@ fun ChipGroups(homeScreenState: State<HomeScreenState>, homeViewModel: HomeViewM
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start,
     ) {
-        androidx.compose.material3.FilterChip(
-            selected = homeScreenState.value.productListCategory == ProductListCategory.AllCategories,
-            onClick = {
-                homeViewModel.getProducts(productListCategory = ProductListCategory.AllCategories)
-            },
-            label = {
-                Text(
-                    text = stringResource(id = R.string.all_categories),
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
-        )
-        Spacer(modifier = Modifier.width(4.dp))
-        androidx.compose.material3.FilterChip(
-            selected = homeScreenState.value.productListCategory == ProductListCategory.Electronics,
-            onClick = {
-                homeViewModel.getProducts(productListCategory = ProductListCategory.Electronics)
-            },
-            label = {
-                Text(
-                    text = stringResource(id = R.string.electronics),
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
-        )
-        Spacer(modifier = Modifier.width(4.dp))
-        androidx.compose.material3.FilterChip(
-            selected = homeScreenState.value.productListCategory == ProductListCategory.Jewelery,
-            onClick = {
-                homeViewModel.getProducts(productListCategory = ProductListCategory.Jewelery)
-            },
-            label = {
-                Text(
-                    text = stringResource(id = R.string.jewelery),
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
-        )
-        Spacer(modifier = Modifier.width(4.dp))
-        androidx.compose.material3.FilterChip(
-            selected = homeScreenState.value.productListCategory == ProductListCategory.MenClothing,
-            onClick = {
-                homeViewModel.getProducts(productListCategory = ProductListCategory.MenClothing)
-            },
-            label = {
-                Text(
-                    text = stringResource(id = R.string.men_clothing),
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
-        )
-        Spacer(modifier = Modifier.width(4.dp))
-        androidx.compose.material3.FilterChip(
-            selected = homeScreenState.value.productListCategory == ProductListCategory.WomenClothing,
-            onClick = {
-                homeViewModel.getProducts(productListCategory = ProductListCategory.WomenClothing)
-            },
-            label = {
-                Text(
-                    text = stringResource(id = R.string.women_clothing),
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
-        )
+        for ((category, categoryName) in categoriesMap) {
+            Spacer(modifier = Modifier.width(4.dp))
+            FilterChip(
+                selected = homeScreenState.value.productListCategory == category,
+                onClick = {
+                    homeViewModel.getProducts(productListCategory = category)
+                },
+                label = { Text(text = categoryName) }
+            )
+        }
         Spacer(modifier = Modifier.width(4.dp))
     }
 }

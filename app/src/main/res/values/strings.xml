@@ -14,6 +14,8 @@
     <string name="added_to_cart">Added to cart</string>
     <string name="add_to_favorites">Add to favorites</string>
     <string name="added_to_favorites">Added to favorites</string>
+    <string name="no_cart_products">No products added to shopping cart</string>
+    <string name="no_favorite_products">No products added as favorites</string>
     <string name="product_image">Product image</string>
     <string name="pay_with_paypal">Pay with Paypal</string>
     <string name="pay_with_moncash">Pay with MonCash</string>
@@ -24,4 +26,5 @@
     <string name="jewelery">Jewelery</string>
     <string name="men_clothing">Men\'s clothing</string>
     <string name="women_clothing">Women\'s clothing</string>
+    <string name="remove_from_favorites">Remove from favorites</string>
 </resources>
