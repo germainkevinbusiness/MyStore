@@ -90,7 +90,8 @@ fun FavoriteProductItem(
                         imageVector = Icons.Default.Remove,
                         contentDescription = stringResource(id = R.string.remove_from_favorites)
                                 + " icon",
-                        modifier = Modifier.padding(end = 4.dp)
+                        modifier = Modifier.padding(end = 4.dp),
+                        tint = MaterialTheme.colorScheme.primary,
                     )
                     Text(
                         text = stringResource(id = R.string.remove_from_favorites),

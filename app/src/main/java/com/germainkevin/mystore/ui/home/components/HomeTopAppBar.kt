@@ -30,8 +30,8 @@ fun HomeTopAppBar(
     scrollBehavior: CollapsingTopBarScrollBehavior
 ) {
     val isSettingsDropDownExpanded = remember { mutableStateOf(false) }
-    val chosenSettingPosition = remember { mutableStateOf(0) }
-    val listOfChoices = mutableListOf(stringResource(id = R.string.pay))
+    val listOfChoices =
+        listOf(stringResource(id = R.string.action_settings), stringResource(id = R.string.pay))
     CollapsingTopBar(
         scrollBehavior = scrollBehavior,
         title = {
@@ -62,7 +62,6 @@ fun HomeTopAppBar(
         actions = {
             ActionsMenu(
                 isSettingsDropDownExpanded = isSettingsDropDownExpanded,
-                chosenSettingPosition = chosenSettingPosition,
                 listOfChoices = listOfChoices,
                 navActions = navActions
             )
@@ -73,7 +72,6 @@ fun HomeTopAppBar(
 @Composable
 private fun ActionsMenu(
     isSettingsDropDownExpanded: MutableState<Boolean>,
-    chosenSettingPosition: MutableState<Int>,
     listOfChoices: List<String>,
     navActions: NavActions
 
@@ -100,8 +98,11 @@ private fun ActionsMenu(
             listOfChoices.forEachIndexed { index: Int, item: String ->
                 DropdownMenuItem(
                     onClick = {
-                        chosenSettingPosition.value = index
-                        navActions.navigateToPaySection()
+                        if (index == 0) {
+                            navActions.navigateToSettings()
+                        } else {
+                            navActions.navigateToPaySection()
+                        }
                         isSettingsDropDownExpanded.value = false
                     }
                 ) {

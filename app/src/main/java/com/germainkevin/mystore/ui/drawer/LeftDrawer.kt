@@ -104,12 +104,12 @@ fun LeftDrawer(
                 .align(
                     Alignment.BottomEnd
                 )
-                .padding(horizontal = 18.dp, vertical = 24.dp)
+                .padding(horizontal = 18.dp, vertical = 32.dp)
         ) {
             Icon(
                 imageVector = Icons.Default.Settings,
                 contentDescription = stringResource(id = R.string.action_settings) + " icon",
-                modifier = Modifier.size(36.dp),
+                modifier = Modifier.size(32.dp),
             )
         }
     }

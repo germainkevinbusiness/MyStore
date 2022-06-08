@@ -2,6 +2,7 @@ package com.germainkevin.mystore.di
 
 import android.app.Application
 import androidx.room.Room
+import com.germainkevin.mystore.PersistentStorage
 import com.germainkevin.mystore.data.MyShopDatabase
 import com.germainkevin.mystore.data.api.FakeStoreApi
 import com.germainkevin.mystore.data.repository.ProductsRepository
@@ -18,6 +19,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    @Singleton
+    fun providePersistentStorage(application: Application): PersistentStorage {
+        return PersistentStorage(application.applicationContext)
+    }
 
     @Provides
     @Singleton

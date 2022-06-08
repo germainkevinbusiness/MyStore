@@ -7,10 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavType
@@ -28,20 +25,29 @@ import com.germainkevin.mystore.ui.settings.SettingsScreen
 import com.germainkevin.mystore.ui.theme.MyStoreTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject
+    lateinit var persistentStorage: PersistentStorage
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            MyStoreTheme(dynamicColor = false) {
+            val isUsingDynamicTheme =
+                persistentStorage.isUsingDynamicTheme.collectAsState(initial = false)
+            val dynamicThemeState = remember { mutableStateOf(isUsingDynamicTheme.value) }
+            MyStoreTheme(dynamicColor = dynamicThemeState.value) {
                 val navController = rememberNavController()
                 val navActions = remember(navController) { NavActions(navController) }
                 val coroutineScope = rememberCoroutineScope()
                 MainScreen(
                     navActions = navActions,
-                    coroutineScope = coroutineScope
+                    coroutineScope = coroutineScope,
+                    persistentStorage = persistentStorage,
+                    dynamicThemeState = dynamicThemeState
                 )
             }
         }
@@ -49,7 +55,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun MainScreen(navActions: NavActions, coroutineScope: CoroutineScope) {
+private fun MainScreen(
+    navActions: NavActions,
+    coroutineScope: CoroutineScope,
+    persistentStorage: PersistentStorage,
+    dynamicThemeState: MutableState<Boolean>
+) {
     val currentBackStackEntry by navActions.navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination?.route ?: NavRoutes.HOME
     Surface(
@@ -102,7 +113,12 @@ private fun MainScreen(navActions: NavActions, coroutineScope: CoroutineScope) {
                 PayScreen(navActions)
             }
             composable(NavRoutes.SETTINGS) {
-                SettingsScreen(navActions = navActions)
+                SettingsScreen(
+                    navActions = navActions,
+                    coroutineScope = coroutineScope,
+                    persistentStorage = persistentStorage,
+                    dynamicThemeState = dynamicThemeState
+                )
             }
         }
     }
