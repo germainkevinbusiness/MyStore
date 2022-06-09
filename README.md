@@ -1,6 +1,6 @@
 # MyStore
 
-A shopping app that uses the https://fakestoreapi.com/ to display data
+A shopping app that uses the fakestoreapi.com to display products
 
 <table>
   <tr>
