@@ -32,6 +32,12 @@ class CartViewModel @Inject constructor(private val repository: ProductsReposito
         }
     }
 
+    fun updateProduct(product: Product) {
+        repository.updateProduct(viewModelScope, product = product) {
+            getProducts()
+        }
+    }
+
     init {
         getProducts()
     }

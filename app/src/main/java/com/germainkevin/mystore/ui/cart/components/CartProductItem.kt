@@ -2,9 +2,14 @@ package com.germainkevin.mystore.ui.cart.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -13,17 +18,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.germainkevin.mystore.data.Product
 import com.germainkevin.mystore.R
+import com.germainkevin.mystore.data.Product
 
 @Composable
 fun CartProductItem(
     modifier: Modifier = Modifier,
     product: Product,
+    removeFromCart: (Product) -> Unit
 ) {
     Card(
         modifier = modifier,
@@ -67,6 +74,48 @@ fun CartProductItem(
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
             )
+            Row(
+                modifier = Modifier
+                    .padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 8.dp)
+            ) {
+                OutlinedButton(
+                    onClick = { removeFromCart(product.copy(addedToCart = false)) },
+                    modifier = Modifier
+                        .padding(end = 8.dp)
+                        .weight(1f),
+                    shape = RoundedCornerShape(10)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Remove,
+                        contentDescription = stringResource(id = R.string.remove_from_cart)
+                                + " icon",
+                        modifier = Modifier.padding(end = 4.dp),
+                        tint = MaterialTheme.colorScheme.primary,
+                    )
+                    Text(
+                        text = stringResource(id = R.string.remove_from_cart),
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
         }
     }
+}
+
+@Preview
+@Composable
+fun CartPreview() {
+    val product = Product(
+        title = "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+        description = "Your perfect pack for everyday use and walks in the forest. " +
+                "Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+        image = "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+        price = 109.95f,
+        category = "Electronics",
+        id = 1,
+    )
+
+    CartProductItem(product = product, removeFromCart = {
+    })
 }

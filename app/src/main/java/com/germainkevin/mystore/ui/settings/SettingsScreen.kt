@@ -8,22 +8,21 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.germainkevin.collapsingtopbar.rememberCollapsingTopBarScrollBehavior
-import com.germainkevin.mystore.NavActions
-import com.germainkevin.mystore.PersistentStorage
+import com.germainkevin.mystore.R
 import com.germainkevin.mystore.ui.settings.components.OneTextToggleSettingsButton
 import com.germainkevin.mystore.ui.settings.components.SettingsTopBar
-import com.germainkevin.mystore.R
+import com.germainkevin.mystore.utils.NavActions
+import com.germainkevin.mystore.utils.PersistentStorage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 @Composable

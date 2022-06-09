@@ -14,8 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.germainkevin.mystore.NavActions
-import com.germainkevin.mystore.NavRoutes
+import com.germainkevin.mystore.utils.NavActions
+import com.germainkevin.mystore.utils.NavRoutes
 import com.germainkevin.mystore.R
 import com.germainkevin.mystore.data.Product
 

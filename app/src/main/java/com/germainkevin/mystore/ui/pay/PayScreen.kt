@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.germainkevin.collapsingtopbar.CollapsingTopBar
 import com.germainkevin.collapsingtopbar.rememberCollapsingTopBarScrollBehavior
-import com.germainkevin.mystore.NavActions
+import com.germainkevin.mystore.utils.NavActions
 import com.germainkevin.mystore.R
 
 @Composable

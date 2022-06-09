@@ -12,7 +12,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.germainkevin.collapsingtopbar.CollapsingTopBar
 import com.germainkevin.collapsingtopbar.CollapsingTopBarScrollBehavior
-import com.germainkevin.mystore.NavActions
 import com.germainkevin.mystore.R
 import com.germainkevin.mystore.data.Product
 

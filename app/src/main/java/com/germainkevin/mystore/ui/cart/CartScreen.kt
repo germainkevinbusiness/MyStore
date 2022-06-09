@@ -4,19 +4,25 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.rememberNavController
 import com.germainkevin.collapsingtopbar.rememberCollapsingTopBarScrollBehavior
-import com.germainkevin.mystore.NavActions
+import com.germainkevin.mystore.utils.NavActions
 import com.germainkevin.mystore.R
 import com.germainkevin.mystore.ui.cart.components.CartProductItem
 import com.germainkevin.mystore.ui.cart.components.CartTopAppBar
@@ -36,7 +42,10 @@ fun CartScreen(
     val closeLeftDrawer: () -> Unit =
         { coroutineScope.launch { scaffoldState.drawerState.close() } }
 
-    val scrollBehavior = rememberCollapsingTopBarScrollBehavior(isAlwaysCollapsed = true)
+    val scrollBehavior = rememberCollapsingTopBarScrollBehavior(
+        centeredTitleAndSubtitle = false,
+        expandedTopBarMaxHeight = 126.dp
+    )
 
     val addedToCartProducts =
         cartViewModel.cartScreenState.value.allProducts.filter { it.addedToCart }
@@ -65,6 +74,7 @@ fun CartScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .background(color = MaterialTheme.colorScheme.background)
+                        .verticalScroll(rememberScrollState())
                         .padding(contentPadding),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -89,7 +99,10 @@ fun CartScreen(
                             modifier = Modifier
                                 .padding(start = 4.dp, end = 4.dp, top = 4.dp, bottom = 12.dp)
                                 .fillMaxWidth(),
-                            product = product
+                            product = product,
+                            removeFromCart = {
+                                cartViewModel.updateProduct(it)
+                            }
                         )
                     }
                 }

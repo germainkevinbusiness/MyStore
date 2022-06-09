@@ -1,4 +1,4 @@
-package com.germainkevin.mystore
+package com.germainkevin.mystore.utils
 
 import androidx.navigation.NavHostController
 

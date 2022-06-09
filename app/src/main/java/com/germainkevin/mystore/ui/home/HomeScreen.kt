@@ -19,7 +19,7 @@ import com.germainkevin.mystore.ui.home.components.ChipGroups
 import com.germainkevin.mystore.ui.home.components.HomeTopAppBar
 import com.germainkevin.mystore.ui.home.components.ProductItem
 import com.germainkevin.collapsingtopbar.rememberCollapsingTopBarScrollBehavior
-import com.germainkevin.mystore.NavActions
+import com.germainkevin.mystore.utils.NavActions
 import com.germainkevin.mystore.ui.drawer.LeftDrawer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

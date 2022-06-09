@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.germainkevin.mystore.NavActions
+import com.germainkevin.mystore.utils.NavActions
 import com.germainkevin.mystore.R
 import com.germainkevin.mystore.ui.detail.components.DetailItem
 

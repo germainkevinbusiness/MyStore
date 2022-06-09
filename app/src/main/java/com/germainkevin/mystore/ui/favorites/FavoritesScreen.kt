@@ -4,6 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.MaterialTheme
@@ -18,7 +20,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.germainkevin.mystore.ui.favorites.components.FavoriteProductItem
 import com.germainkevin.mystore.ui.favorites.components.FavoritesTopAppBar
 import com.germainkevin.collapsingtopbar.rememberCollapsingTopBarScrollBehavior
-import com.germainkevin.mystore.NavActions
+import com.germainkevin.mystore.utils.NavActions
 import com.germainkevin.mystore.ui.drawer.LeftDrawer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -37,7 +39,10 @@ fun FavoritesScreen(
     val closeLeftDrawer: () -> Unit =
         { coroutineScope.launch { scaffoldState.drawerState.close() } }
 
-    val scrollBehavior = rememberCollapsingTopBarScrollBehavior(isAlwaysCollapsed = true)
+    val scrollBehavior = rememberCollapsingTopBarScrollBehavior(
+        centeredTitleAndSubtitle = false,
+        expandedTopBarMaxHeight = 126.dp
+    )
 
     val addedAsFavoriteProducts =
         favoritesViewModel.favoritesScreenState.value.allProducts.filter { it.addedAsFavorite }
@@ -67,6 +72,7 @@ fun FavoritesScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .background(color = MaterialTheme.colorScheme.background)
+                        .verticalScroll(rememberScrollState())
                         .padding(contentPadding),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally

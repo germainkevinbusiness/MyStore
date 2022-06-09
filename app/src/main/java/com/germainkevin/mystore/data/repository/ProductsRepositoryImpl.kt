@@ -3,7 +3,7 @@ package com.germainkevin.mystore.data.repository
 import com.germainkevin.mystore.data.Product
 import com.germainkevin.mystore.data.ProductDao
 import com.germainkevin.mystore.data.api.FakeStoreApi
-import com.germainkevin.mystore.getProductsByCategory
+import com.germainkevin.mystore.utils.getProductsByCategory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest

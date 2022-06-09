@@ -2,11 +2,11 @@ package com.germainkevin.mystore.di
 
 import android.app.Application
 import androidx.room.Room
-import com.germainkevin.mystore.PersistentStorage
 import com.germainkevin.mystore.data.MyShopDatabase
 import com.germainkevin.mystore.data.api.FakeStoreApi
 import com.germainkevin.mystore.data.repository.ProductsRepository
 import com.germainkevin.mystore.data.repository.ProductsRepositoryImpl
+import com.germainkevin.mystore.utils.PersistentStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
