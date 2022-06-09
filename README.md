@@ -1,6 +1,6 @@
 # MyStore
 
-A shopping app that uses the https://fakestoreapi.com to display products
+A shopping app made with Jetpack Compose, that uses the https://fakestoreapi.com to display products
 
 <table>
   <tr>
