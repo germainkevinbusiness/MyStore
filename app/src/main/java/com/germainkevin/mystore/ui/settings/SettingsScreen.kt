@@ -58,7 +58,6 @@ fun SettingsScreen(
                     state = dynamicThemeState,
                     hasDivider = true,
                     onCheckedChange = {
-                        dynamicThemeState.value = !dynamicThemeState.value
                         coroutineScope.launch(Dispatchers.IO) {
                             persistentStorage.setUsingDynamicThemeState(dynamicThemeState.value)
                         }

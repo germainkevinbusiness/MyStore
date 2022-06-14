@@ -28,7 +28,6 @@ import com.germainkevin.mystore.utils.NavRoutes
 import com.germainkevin.mystore.utils.PersistentStorage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -41,11 +40,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            val isUsingDynamicTheme =
-                persistentStorage.isUsingDynamicTheme.collectAsState(initial = false)
-            Timber.d("dynamicThemeState: isUsingDynamicTheme: ${isUsingDynamicTheme.value}")
-            val dynamicThemeState = remember { mutableStateOf(isUsingDynamicTheme.value) }
-            Timber.d("dynamicThemeState: ${dynamicThemeState.value}")
+            val isDynamicStateTheme =
+                persistentStorage.isUsingDynamicTheme.collectAsState(false).value
+            val dynamicThemeState = mutableStateOf(isDynamicStateTheme)
             MyStoreTheme(dynamicColor = dynamicThemeState.value) {
                 val navController = rememberNavController()
                 val navActions = remember(navController) { NavActions(navController) }

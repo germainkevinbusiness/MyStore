@@ -7,20 +7,20 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
-
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 
 class PersistentStorage(private val context: Context) {
 
     companion object {
+        val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
         val IS_USING_DYNAMIC_THEME = booleanPreferencesKey("isUsingDynamicTheme")
     }
 
-    suspend fun setUsingDynamicThemeState(value: Boolean) {
+    suspend fun setUsingDynamicThemeState(newValue: Boolean) {
         context.dataStore.edit { settings ->
-            settings[IS_USING_DYNAMIC_THEME] = value
+            settings[IS_USING_DYNAMIC_THEME] = newValue
         }
     }
 
