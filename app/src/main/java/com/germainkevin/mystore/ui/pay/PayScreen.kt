@@ -91,7 +91,7 @@ fun PayScreen(navActions: NavActions) {
                             elevation = ButtonDefaults.buttonElevation(pressedElevation = 8.dp)
                         ) {
                             Text(
-                                text = stringResource(id = R.string.pay_with_moncash),
+                                text = stringResource(id = R.string.pay_with_amazon_pay),
                                 fontSize = 18.sp,
                                 color = MaterialTheme.colorScheme.onPrimary,
                                 fontWeight = FontWeight.Medium

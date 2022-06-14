@@ -18,7 +18,7 @@
     <string name="no_favorite_products">No products added as favorites</string>
     <string name="product_image">Product image</string>
     <string name="pay_with_paypal">Pay with Paypal</string>
-    <string name="pay_with_moncash">Pay with MonCash</string>
+    <string name="pay_with_amazon_pay">Pay with Amazon Pay</string>
     <string name="pay_with_card">Pay with Credit/Debit Card</string>
 
     <string name="all_categories">All categories</string>
