@@ -1,5 +1,8 @@
 package com.germainkevin.mystore.utils
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import com.germainkevin.mystore.data.Product
 import com.germainkevin.mystore.data.repository.ProductListCategory
 
@@ -11,6 +14,12 @@ val allProductCategories = listOf(
     "men's clothing",
     "women's clothing"
 )
+
+fun sendUserToSpecificWebPage(url: String, activity: Activity) {
+    val openBrowserIntent = Intent(Intent.ACTION_VIEW)
+    openBrowserIntent.data = Uri.parse(url)
+    activity.startActivity(openBrowserIntent)
+}
 
 fun List<Product>.getProductsByCategory(
     productListCategory: ProductListCategory,

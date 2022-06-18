@@ -3,6 +3,7 @@ package com.germainkevin.mystore.utils
 import androidx.navigation.NavHostController
 
 object NavRoutes {
+    const val ABOUT = "About"
     const val HOME = "Home"
     const val PRODUCT_DETAIL = "Product_Detail?productId="
     const val CART = "Cart"
@@ -40,5 +41,9 @@ class NavActions(private val navHostController: NavHostController) {
 
     var navigateToSettings: () -> Unit = {
         navController.navigate(NavRoutes.SETTINGS)
+    }
+
+    var navigateToAbout: () -> Unit = {
+        navController.navigate(NavRoutes.ABOUT)
     }
 }

@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.germainkevin.mystore.utils.NavActions
 import com.germainkevin.mystore.utils.NavRoutes
 import com.germainkevin.mystore.R
@@ -43,8 +44,8 @@ fun LeftDrawer(
             Spacer(modifier = Modifier.height(24.dp))
             Text(
                 text = stringResource(id = R.string.app_name),
-                style = MaterialTheme.typography.displaySmall.copy(
-                    color = MaterialTheme.colorScheme.onBackground
+                style = MaterialTheme.typography.headlineLarge.copy(
+                    color = MaterialTheme.colorScheme.onBackground,
                 ),
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
@@ -110,6 +111,7 @@ fun LeftDrawer(
                 imageVector = Icons.Default.Settings,
                 contentDescription = stringResource(id = R.string.action_settings) + " icon",
                 modifier = Modifier.size(32.dp),
+                tint = MaterialTheme.colorScheme.onBackground
             )
         }
     }

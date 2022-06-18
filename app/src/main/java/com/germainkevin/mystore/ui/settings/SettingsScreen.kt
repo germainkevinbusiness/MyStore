@@ -16,7 +16,9 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.germainkevin.collapsingtopbar.rememberCollapsingTopBarScrollBehavior
+import com.germainkevin.mystore.BuildConfig
 import com.germainkevin.mystore.R
+import com.germainkevin.mystore.ui.settings.components.OneTextSettingsButton
 import com.germainkevin.mystore.ui.settings.components.OneTextToggleSettingsButton
 import com.germainkevin.mystore.ui.settings.components.SettingsTopBar
 import com.germainkevin.mystore.utils.NavActions
@@ -56,13 +58,25 @@ fun SettingsScreen(
                 OneTextToggleSettingsButton(
                     title = stringResource(id = R.string.use_dynamic_theme),
                     state = dynamicThemeState,
-                    hasDivider = true,
                     onCheckedChange = {
                         coroutineScope.launch(Dispatchers.IO) {
                             persistentStorage.setUsingDynamicThemeState(dynamicThemeState.value)
                         }
                     }
                 )
+                OneTextSettingsButton(
+                    title = stringResource(id = R.string.about_my_store),
+                    triggersActionOnClick = true,
+                    hasDivider = true
+                ) {
+                    navActions.navigateToAbout()
+                }
+                OneTextSettingsButton(
+                    title = stringResource(id = R.string.app_version, BuildConfig.VERSION_NAME),
+                    triggersActionOnClick = false,
+                    hasDivider = false
+                ) {
+                }
             }
         }
     }

@@ -3,53 +3,48 @@ package com.germainkevin.mystore.ui.settings.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 /**
  * @param title The name of the Settings Action
- * @param state The state to toggle the [Switch]
- * @param hasDivider Whether to have
+ * @param triggersActionOnClick Should [doOnClick] be called when a click event is recorded on
+ * this composable
+ * @param doOnClick A callback method for when a click event is recorded
  * */
 @Composable
-fun OneTextToggleSettingsButton(
+fun OneTextSettingsButton(
     title: String,
-    state: MutableState<Boolean>,
+    triggersActionOnClick: Boolean,
     hasDivider: Boolean = true,
-    onCheckedChange: () -> Unit
+    doOnClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .wrapContentSize()
             .background(MaterialTheme.colorScheme.surface)
-            .clickable {
-                state.value = !state.value
-                onCheckedChange()
-            },
+            .clickable { if (triggersActionOnClick) doOnClick() },
     ) {
         Row(
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
         ) {
             Text(
                 text = title,
                 fontSize = 18.sp,
                 overflow = TextOverflow.Ellipsis,
-                color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.weight(1f)
+                color =
+                if (triggersActionOnClick) MaterialTheme.colorScheme.onSurface
+                else Color.Gray
             )
-            Switch(
-                modifier = Modifier.padding(start = 8.dp),
-                checked = state.value, onCheckedChange = {
-                    state.value = !state.value
-                    onCheckedChange()
-                })
         }
         if (hasDivider) Divider(
             modifier = Modifier.padding(horizontal = 16.dp),

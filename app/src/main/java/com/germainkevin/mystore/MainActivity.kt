@@ -16,6 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.germainkevin.mystore.ui.about.AboutScreen
 import com.germainkevin.mystore.ui.cart.CartScreen
 import com.germainkevin.mystore.ui.detail.DetailScreen
 import com.germainkevin.mystore.ui.favorites.FavoritesScreen
@@ -48,6 +49,7 @@ class MainActivity : ComponentActivity() {
                 val navActions = remember(navController) { NavActions(navController) }
                 val coroutineScope = rememberCoroutineScope()
                 MainScreen(
+                    activity = this,
                     navActions = navActions,
                     coroutineScope = coroutineScope,
                     persistentStorage = persistentStorage,
@@ -60,6 +62,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun MainScreen(
+    activity: MainActivity,
     navActions: NavActions,
     coroutineScope: CoroutineScope,
     persistentStorage: PersistentStorage,
@@ -123,6 +126,9 @@ private fun MainScreen(
                     persistentStorage = persistentStorage,
                     dynamicThemeState = dynamicThemeState
                 )
+            }
+            composable(NavRoutes.ABOUT) {
+                AboutScreen(navActions = navActions, activity = activity)
             }
         }
     }
