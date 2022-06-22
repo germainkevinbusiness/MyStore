@@ -1,7 +1,9 @@
 buildscript {
     ext {
-        compose_version = '1.2.0-beta03'
+        compose_version = '1.2.0-rc01'
+        material_version = '1.2.0-rc01'
         retrofitVersion = '2.9.0'
+        room_version = "2.4.2"
     }
     dependencies {
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.40.1'

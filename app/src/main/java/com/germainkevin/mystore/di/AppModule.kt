@@ -38,7 +38,11 @@ object AppModule {
     @Provides
     @Singleton
     fun provideMyShopDatabase(application: Application): MyShopDatabase {
-        return Room.databaseBuilder(application, MyShopDatabase::class.java, "my_shop")
+        return Room.databaseBuilder(
+            application.applicationContext,
+            MyShopDatabase::class.java,
+            "my_shop"
+        )
             .build()
     }
 

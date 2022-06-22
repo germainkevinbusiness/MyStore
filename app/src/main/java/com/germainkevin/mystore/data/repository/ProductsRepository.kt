@@ -1,6 +1,7 @@
 package com.germainkevin.mystore.data.repository
 
 import com.germainkevin.mystore.data.Product
+import com.germainkevin.mystore.data.ProductListCategory
 import kotlinx.coroutines.CoroutineScope
 
 interface ProductsRepository {

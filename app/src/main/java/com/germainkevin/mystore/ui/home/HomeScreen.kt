@@ -15,12 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.germainkevin.collapsingtopbar.rememberCollapsingTopBarScrollBehavior
+import com.germainkevin.mystore.ui.drawer.LeftDrawer
 import com.germainkevin.mystore.ui.home.components.ChipGroups
 import com.germainkevin.mystore.ui.home.components.HomeTopAppBar
 import com.germainkevin.mystore.ui.home.components.ProductItem
-import com.germainkevin.collapsingtopbar.rememberCollapsingTopBarScrollBehavior
 import com.germainkevin.mystore.utils.NavActions
-import com.germainkevin.mystore.ui.drawer.LeftDrawer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -83,11 +83,28 @@ fun HomeScreen(
                             CircularProgressIndicator()
                         }
                     }
-                }
-                item {
                     if (homeScreenState.value.allProducts.isNotEmpty()) {
                         ChipGroups(homeScreenState = homeScreenState, homeViewModel = homeViewModel)
                     }
+                    //                    else {
+//                        Column(
+//                            modifier = Modifier
+//                                .fillMaxSize()
+//                                .background(MaterialTheme.colorScheme.background)
+//                                .padding(contentPadding),
+//                            verticalArrangement = Arrangement.Center,
+//                            horizontalAlignment = Alignment.CenterHorizontally
+//                        ) {
+//                            Text(
+//                                text = stringResource(id = R.string.error_retrieving_products),
+//                                style = LocalTextStyle.current.copy(
+//                                    color = MaterialTheme.colorScheme.onBackground,
+//                                    fontSize = 18.sp,
+//                                    fontWeight = FontWeight.Normal
+//                                )
+//                            )
+//                        }
+//                    }
                 }
                 items(homeScreenState.value.allProducts) { product ->
                     ProductItem(modifier = Modifier

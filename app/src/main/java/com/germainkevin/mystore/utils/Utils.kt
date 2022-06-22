@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import com.germainkevin.mystore.data.Product
-import com.germainkevin.mystore.data.repository.ProductListCategory
+import com.germainkevin.mystore.data.ProductListCategory
 
 /**
  * List of possible product categories coming from the remote FakeStore API*/

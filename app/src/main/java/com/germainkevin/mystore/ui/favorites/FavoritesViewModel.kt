@@ -4,7 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.germainkevin.mystore.data.Product
-import com.germainkevin.mystore.data.repository.ProductListCategory
+import com.germainkevin.mystore.data.ProductListCategory
 import com.germainkevin.mystore.data.repository.ProductsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

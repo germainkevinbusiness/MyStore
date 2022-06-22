@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.germainkevin.mystore.R
-import com.germainkevin.mystore.data.repository.ProductListCategory
+import com.germainkevin.mystore.data.ProductListCategory
 import com.germainkevin.mystore.ui.home.HomeScreenState
 import com.germainkevin.mystore.ui.home.HomeViewModel
 

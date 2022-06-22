@@ -37,4 +37,5 @@
     <string name="about_my_store_link">https://fakestoreapi.com</string>
     <string name="about_my_store_content_suffix">to display products</string>
     <string name="app_version">App Version : %s</string>
+    <string name="error_retrieving_products">Error retrieving products</string>
 </resources>
