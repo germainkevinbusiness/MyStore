@@ -43,6 +43,7 @@ object AppModule {
             MyShopDatabase::class.java,
             "my_shop"
         )
+            .fallbackToDestructiveMigration()
             .build()
     }
 

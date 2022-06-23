@@ -33,11 +33,11 @@ class ProductsRepositoryImpl @Inject constructor(
                             response: Response<List<Product>?>
                         ) {
                             response.body()?.let { products ->
-                                products.getProductsByCategory(productListCategory) { prods ->
-                                    result(prods)
-                                }
                                 coroutineScope.launch(Dispatchers.IO) {
                                     productDao.insertProducts(products)
+                                }
+                                products.getProductsByCategory(productListCategory) { prods ->
+                                    result(prods)
                                 }
                             }
                                 ?: result(emptyList())

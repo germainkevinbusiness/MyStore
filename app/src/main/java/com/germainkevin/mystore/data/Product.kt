@@ -1,12 +1,11 @@
 package com.germainkevin.mystore.data
 
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "product")
 data class Product(
-    @PrimaryKey(autoGenerate = false) val id: Int,
+    @PrimaryKey val id: Int,
     val title: String,
     val price: Float,
     val category: String,
