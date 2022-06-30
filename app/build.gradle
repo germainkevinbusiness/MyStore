@@ -13,8 +13,8 @@ android {
         applicationId "com.germainkevin.mystore"
         minSdk 21
         targetSdk 32
-        versionCode 7
-        versionName "1.7"
+        versionCode 10
+        versionName "1.10"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -71,7 +71,7 @@ dependencies {
     implementation "androidx.compose.material3:material3-window-size-class:1.0.0-alpha13"
 
     // CollapsingTopBarCompose library
-    implementation 'com.github.germainkevinbusiness:CollapsingTopBarCompose:1.0.0-beta07'
+    implementation 'com.github.germainkevinbusiness:CollapsingTopBarCompose:1.0.0-beta09'
 
     // Retrofit: fetching remote data
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"

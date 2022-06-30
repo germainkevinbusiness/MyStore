@@ -1,6 +1,8 @@
 package com.germainkevin.mystore.ui.home
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.germainkevin.mystore.data.Product
@@ -20,18 +22,17 @@ data class HomeScreenState(
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: ProductsRepository) : ViewModel() {
 
-    var homeScreenState = mutableStateOf(HomeScreenState())
+    var homeScreenState by mutableStateOf(HomeScreenState())
         private set
 
     fun getProducts(productListCategory: ProductListCategory) {
         repository.getProducts(viewModelScope, productListCategory) { products ->
             viewModelScope.launch(Dispatchers.Main) {
-                homeScreenState.value =
-                    homeScreenState.value.copy(
-                        allProducts = products,
-                        isLoading = false,
-                        productListCategory = productListCategory
-                    )
+                homeScreenState = homeScreenState.copy(
+                    allProducts = products,
+                    isLoading = false,
+                    productListCategory = productListCategory
+                )
             }
         }
     }
@@ -44,7 +45,7 @@ class HomeViewModel @Inject constructor(private val repository: ProductsReposito
     }
 
     init {
-        homeScreenState.value = homeScreenState.value.copy(isLoading = true)
+        homeScreenState = homeScreenState.copy(isLoading = true)
         getProducts(productListCategory = ProductListCategory.AllCategories)
     }
 }

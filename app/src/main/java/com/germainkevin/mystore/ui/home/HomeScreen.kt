@@ -50,7 +50,7 @@ fun HomeScreen(
         scaffoldState = scaffoldState,
         topBar = {
             HomeTopAppBar(
-                allProducts = homeScreenState.value.allProducts,
+                allProducts = homeScreenState.allProducts,
                 navActions,
                 openLeftDrawer,
                 scrollBehavior
@@ -58,7 +58,7 @@ fun HomeScreen(
         },
         drawerContent = {
             LeftDrawer(
-                allProducts = homeScreenState.value.allProducts,
+                allProducts = homeScreenState.allProducts,
                 currentRoute,
                 navActions,
                 closeLeftDrawer
@@ -72,7 +72,7 @@ fun HomeScreen(
                     .padding(contentPadding)
             ) {
                 item {
-                    if (homeScreenState.value.isLoading) {
+                    if (homeScreenState.isLoading) {
                         Column(
                             modifier = Modifier
                                 .fillMaxSize()
@@ -83,7 +83,7 @@ fun HomeScreen(
                             CircularProgressIndicator()
                         }
                     }
-                    if (homeScreenState.value.allProducts.isNotEmpty()) {
+                    if (homeScreenState.allProducts.isNotEmpty()) {
                         ChipGroups(homeScreenState = homeScreenState, homeViewModel = homeViewModel)
                     }
                     //                    else {
@@ -106,7 +106,7 @@ fun HomeScreen(
 //                        }
 //                    }
                 }
-                items(homeScreenState.value.allProducts) { product ->
+                items(homeScreenState.allProducts) { product ->
                     ProductItem(modifier = Modifier
                         .padding(start = 4.dp, end = 4.dp, top = 4.dp, bottom = 12.dp)
                         .fillMaxWidth(),
@@ -115,13 +115,13 @@ fun HomeScreen(
                         onAddToCart = {
                             homeViewModel.updateProduct(
                                 product = product.copy(addedToCart = it),
-                                productListCategory = homeScreenState.value.productListCategory,
+                                productListCategory = homeScreenState.productListCategory,
                             )
                         },
                         onAddToFavorites = {
                             homeViewModel.updateProduct(
                                 product = product.copy(addedAsFavorite = it),
-                                productListCategory = homeScreenState.value.productListCategory,
+                                productListCategory = homeScreenState.productListCategory,
                             )
                         }
                     )

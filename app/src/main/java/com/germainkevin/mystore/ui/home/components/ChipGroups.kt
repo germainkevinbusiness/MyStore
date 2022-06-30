@@ -7,10 +7,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.germainkevin.mystore.R
 import com.germainkevin.mystore.data.ProductListCategory
@@ -19,14 +20,19 @@ import com.germainkevin.mystore.ui.home.HomeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChipGroups(homeScreenState: State<HomeScreenState>, homeViewModel: HomeViewModel) {
-    val categoriesMap = mapOf(
-        ProductListCategory.AllCategories to stringResource(id = R.string.all_categories),
-        ProductListCategory.Electronics to stringResource(id = R.string.electronics),
-        ProductListCategory.Jewelery to stringResource(id = R.string.jewelery),
-        ProductListCategory.MenClothing to stringResource(id = R.string.men_clothing),
-        ProductListCategory.WomenClothing to stringResource(id = R.string.women_clothing)
-    )
+fun ChipGroups(homeScreenState: HomeScreenState, homeViewModel: HomeViewModel) {
+    val context = LocalContext.current
+    val categoriesMap = remember {
+        mutableStateOf(
+            mapOf(
+                ProductListCategory.AllCategories to context.getString(R.string.all_categories),
+                ProductListCategory.Electronics to context.getString(R.string.electronics),
+                ProductListCategory.Jewelery to context.getString(R.string.jewelery),
+                ProductListCategory.MenClothing to context.getString(R.string.men_clothing),
+                ProductListCategory.WomenClothing to context.getString(R.string.women_clothing)
+            )
+        )
+    }
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -35,14 +41,14 @@ fun ChipGroups(homeScreenState: State<HomeScreenState>, homeViewModel: HomeViewM
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start,
     ) {
-        for ((category, categoryName) in categoriesMap) {
+        for (category in categoriesMap.value) {
             Spacer(modifier = Modifier.width(4.dp))
             FilterChip(
-                selected = homeScreenState.value.productListCategory == category,
+                selected = homeScreenState.productListCategory == category.key,
                 onClick = {
-                    homeViewModel.getProducts(productListCategory = category)
+                    homeViewModel.getProducts(productListCategory = category.key)
                 },
-                label = { Text(text = categoryName) }
+                label = { Text(text = category.value) }
             )
         }
         Spacer(modifier = Modifier.width(4.dp))
