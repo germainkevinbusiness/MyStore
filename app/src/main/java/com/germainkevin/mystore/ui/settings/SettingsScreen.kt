@@ -1,5 +1,6 @@
 package com.germainkevin.mystore.ui.settings
 
+import android.view.Window
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -32,13 +33,20 @@ fun SettingsScreen(
     navActions: NavActions,
     coroutineScope: CoroutineScope,
     persistentStorage: PersistentStorage,
-    dynamicThemeState: MutableState<Boolean>
+    dynamicThemeState: MutableState<Boolean>,
+    window: Window
 ) {
     val scrollBehavior = rememberCollapsingTopBarScrollBehavior(centeredTitleAndSubtitle = false)
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         scaffoldState = rememberScaffoldState(),
-        topBar = { SettingsTopBar(navActions = navActions, scrollBehavior = scrollBehavior) },
+        topBar = {
+            SettingsTopBar(
+                navActions = navActions,
+                scrollBehavior = scrollBehavior,
+                window = window
+            )
+        },
     ) { contentPadding ->
         Column(
             modifier = Modifier

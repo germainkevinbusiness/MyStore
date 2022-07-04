@@ -1,5 +1,6 @@
 package com.germainkevin.mystore.ui.settings.components
 
+import android.view.Window
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
@@ -7,16 +8,22 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.germainkevin.collapsingtopbar.CollapsingTopBar
+import com.germainkevin.collapsingtopbar.CollapsingTopBarDefaults
 import com.germainkevin.collapsingtopbar.CollapsingTopBarScrollBehavior
 import com.germainkevin.mystore.utils.NavActions
 import com.germainkevin.mystore.R
 
 @Composable
-fun SettingsTopBar(navActions: NavActions, scrollBehavior: CollapsingTopBarScrollBehavior) {
+fun SettingsTopBar(
+    navActions: NavActions,
+    scrollBehavior: CollapsingTopBarScrollBehavior,
+    window: Window
+) {
     CollapsingTopBar(
         scrollBehavior = scrollBehavior,
         title = {
@@ -27,6 +34,12 @@ fun SettingsTopBar(navActions: NavActions, scrollBehavior: CollapsingTopBarScrol
                 color = MaterialTheme.colorScheme.onPrimary
             )
         },
+        colors = CollapsingTopBarDefaults.colors(
+            backgroundColorWhenNotCollapsedOrExpanded = MaterialTheme.colorScheme.onPrimaryContainer,
+            onBackgroundColorChange = {
+                window.statusBarColor = it.toArgb()
+            }
+        ),
         navigationIcon = {
             IconButton(onClick = { navActions.navController.navigateUp() }) {
                 Icon(

@@ -23,7 +23,7 @@ import com.germainkevin.mystore.data.Product
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LeftDrawer(
-    allProducts: List<Product>,
+    products: List<Product>,
     currentRoute: String,
     navActions: NavActions,
     closeLeftDrawer: () -> Unit
@@ -38,8 +38,8 @@ fun LeftDrawer(
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            val itemsInCart = allProducts.filter { it.addedToCart }
-            val favoriteItems = allProducts.filter { it.addedAsFavorite }
+            val itemsInCart = products.filter { it.addedToCart }
+            val favoriteItems = products.filter { it.addedAsFavorite }
 
             Spacer(modifier = Modifier.height(24.dp))
             Text(
@@ -59,7 +59,7 @@ fun LeftDrawer(
                     closeLeftDrawer()
                 },
                 shape = RoundedCornerShape(topEnd = 24.dp, bottomEnd = 24.dp),
-                badge = { Text(text = allProducts.size.toString()) },
+                badge = { Text(text = products.size.toString()) },
                 modifier = Modifier.padding(end = 16.dp, bottom = 12.dp)
             )
             Spacer(modifier = Modifier.height(8.dp))

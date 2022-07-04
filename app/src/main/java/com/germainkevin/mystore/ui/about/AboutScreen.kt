@@ -35,7 +35,13 @@ fun AboutScreen(navActions: NavActions, activity: MainActivity) {
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         scaffoldState = rememberScaffoldState(),
-        topBar = { AboutTopBar(navActions = navActions, scrollBehavior = scrollBehavior) },
+        topBar = {
+            AboutTopBar(
+                navActions = navActions,
+                scrollBehavior = scrollBehavior,
+                window = activity.window
+            )
+        },
     ) { contentPadding ->
         Column(
             modifier = Modifier

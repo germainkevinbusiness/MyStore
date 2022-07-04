@@ -84,7 +84,8 @@ private fun MainScreen(
                 HomeScreen(
                     currentRoute = currentRoute,
                     navActions = navActions,
-                    coroutineScope = coroutineScope
+                    coroutineScope = coroutineScope,
+                    window = activity.window
                 )
             }
             composable(
@@ -104,7 +105,8 @@ private fun MainScreen(
                 CartScreen(
                     currentRoute = currentRoute,
                     navActions = navActions,
-                    coroutineScope = coroutineScope
+                    coroutineScope = coroutineScope,
+                    window = activity.window
                 )
             }
 
@@ -112,19 +114,21 @@ private fun MainScreen(
                 FavoritesScreen(
                     currentRoute = currentRoute,
                     navActions = navActions,
-                    coroutineScope = coroutineScope
+                    coroutineScope = coroutineScope,
+                    window = activity.window
                 )
             }
 
             composable(NavRoutes.PAY) {
-                PayScreen(navActions)
+                PayScreen(navActions, activity.window)
             }
             composable(NavRoutes.SETTINGS) {
                 SettingsScreen(
                     navActions = navActions,
                     coroutineScope = coroutineScope,
                     persistentStorage = persistentStorage,
-                    dynamicThemeState = dynamicThemeState
+                    dynamicThemeState = dynamicThemeState,
+                    window = activity.window
                 )
             }
             composable(NavRoutes.ABOUT) {

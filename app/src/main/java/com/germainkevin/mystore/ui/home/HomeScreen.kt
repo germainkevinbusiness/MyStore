@@ -1,5 +1,6 @@
 package com.germainkevin.mystore.ui.home
 
+import android.view.Window
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -9,17 +10,21 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.germainkevin.collapsingtopbar.rememberCollapsingTopBarScrollBehavior
+import com.germainkevin.mystore.R
+import com.germainkevin.mystore.data.ProductListCategory
 import com.germainkevin.mystore.ui.drawer.LeftDrawer
-import com.germainkevin.mystore.ui.home.components.ChipGroups
 import com.germainkevin.mystore.ui.home.components.HomeTopAppBar
 import com.germainkevin.mystore.ui.home.components.ProductItem
+import com.germainkevin.mystore.ui.home.components.ProductListCategories
 import com.germainkevin.mystore.utils.NavActions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -29,10 +34,21 @@ fun HomeScreen(
     currentRoute: String,
     navActions: NavActions,
     coroutineScope: CoroutineScope,
+    window: Window,
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
-    val homeScreenState = remember { homeViewModel.homeScreenState }
+    val homeScreenState by remember { homeViewModel.homeScreenState }
+    val context = LocalContext.current
+    val categoriesMap: Map<ProductListCategory, String> = remember {
+        mapOf(
+            ProductListCategory.AllCategories to context.getString(R.string.all_categories),
+            ProductListCategory.Electronics to context.getString(R.string.electronics),
+            ProductListCategory.Jewelery to context.getString(R.string.jewelery),
+            ProductListCategory.MenClothing to context.getString(R.string.men_clothing),
+            ProductListCategory.WomenClothing to context.getString(R.string.women_clothing)
+        )
+    }
     val openLeftDrawer: () -> Unit = {
         coroutineScope.launch { scaffoldState.drawerState.open() }
     }
@@ -50,15 +66,15 @@ fun HomeScreen(
         scaffoldState = scaffoldState,
         topBar = {
             HomeTopAppBar(
-                allProducts = homeScreenState.allProducts,
+                products = homeScreenState.products,
                 navActions,
                 openLeftDrawer,
-                scrollBehavior
+                scrollBehavior,
             )
         },
         drawerContent = {
             LeftDrawer(
-                allProducts = homeScreenState.allProducts,
+                products = homeScreenState.products,
                 currentRoute,
                 navActions,
                 closeLeftDrawer
@@ -83,8 +99,13 @@ fun HomeScreen(
                             CircularProgressIndicator()
                         }
                     }
-                    if (homeScreenState.allProducts.isNotEmpty()) {
-                        ChipGroups(homeScreenState = homeScreenState, homeViewModel = homeViewModel)
+                    if (homeScreenState.products.isNotEmpty()) {
+                        ProductListCategories(
+                            homeScreenState = homeScreenState,
+                            categoriesMap = categoriesMap,
+                            onClick = { category ->
+                                homeViewModel.getProducts(productListCategory = category)
+                            })
                     }
                     //                    else {
 //                        Column(
@@ -106,7 +127,7 @@ fun HomeScreen(
 //                        }
 //                    }
                 }
-                items(homeScreenState.allProducts) { product ->
+                items(homeScreenState.products) { product ->
                     ProductItem(modifier = Modifier
                         .padding(start = 4.dp, end = 4.dp, top = 4.dp, bottom = 12.dp)
                         .fillMaxWidth(),

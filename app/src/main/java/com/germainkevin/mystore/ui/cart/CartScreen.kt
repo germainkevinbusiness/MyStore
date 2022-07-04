@@ -1,5 +1,6 @@
 package com.germainkevin.mystore.ui.cart
 
+import android.view.Window
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,22 +12,18 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.compose.rememberNavController
 import com.germainkevin.collapsingtopbar.rememberCollapsingTopBarScrollBehavior
-import com.germainkevin.mystore.utils.NavActions
 import com.germainkevin.mystore.R
 import com.germainkevin.mystore.ui.cart.components.CartProductItem
 import com.germainkevin.mystore.ui.cart.components.CartTopAppBar
 import com.germainkevin.mystore.ui.drawer.LeftDrawer
+import com.germainkevin.mystore.utils.NavActions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -34,6 +31,7 @@ import kotlinx.coroutines.launch
 fun CartScreen(
     currentRoute: String,
     navActions: NavActions,
+    window: Window,
     coroutineScope: CoroutineScope,
     cartViewModel: CartViewModel = hiltViewModel()
 ) {
@@ -56,13 +54,14 @@ fun CartScreen(
         topBar = {
             CartTopAppBar(
                 itemsInCart = addedToCartProducts,
-                openLeftDrawer,
-                scrollBehavior,
+                openLeftDrawer = openLeftDrawer,
+                window = window,
+                scrollBehavior = scrollBehavior,
             )
         },
         drawerContent = {
             LeftDrawer(
-                allProducts = cartViewModel.cartScreenState.value.allProducts,
+                products = cartViewModel.cartScreenState.value.allProducts,
                 currentRoute,
                 navActions,
                 closeLeftDrawer

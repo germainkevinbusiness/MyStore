@@ -1,5 +1,6 @@
 package com.germainkevin.mystore.ui.home.components
 
+import android.view.Window
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,21 +14,23 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.germainkevin.collapsingtopbar.CollapsingTopBar
+import com.germainkevin.collapsingtopbar.CollapsingTopBarDefaults
 import com.germainkevin.collapsingtopbar.CollapsingTopBarScrollBehavior
-import com.germainkevin.mystore.utils.NavActions
-import com.germainkevin.mystore.data.Product
 import com.germainkevin.mystore.R
+import com.germainkevin.mystore.data.Product
+import com.germainkevin.mystore.utils.NavActions
 
 @Composable
 fun HomeTopAppBar(
-    allProducts: List<Product>,
+    products: List<Product>,
     navActions: NavActions,
     openLeftDrawer: () -> Unit,
-    scrollBehavior: CollapsingTopBarScrollBehavior
+    scrollBehavior: CollapsingTopBarScrollBehavior,
 ) {
     val isSettingsDropDownExpanded = remember { mutableStateOf(false) }
     val listOfChoices =
@@ -44,7 +47,7 @@ fun HomeTopAppBar(
         },
         subtitle = {
             Text(
-                text = stringResource(id = R.string.product_count, allProducts.size.toString()),
+                text = stringResource(id = R.string.product_count, products.size.toString()),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Normal,
                 color = MaterialTheme.colorScheme.onPrimary

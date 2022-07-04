@@ -1,5 +1,6 @@
 package com.germainkevin.mystore.ui.favorites
 
+import android.view.Window
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,14 +18,14 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.germainkevin.collapsingtopbar.rememberCollapsingTopBarScrollBehavior
+import com.germainkevin.mystore.R
+import com.germainkevin.mystore.ui.drawer.LeftDrawer
 import com.germainkevin.mystore.ui.favorites.components.FavoriteProductItem
 import com.germainkevin.mystore.ui.favorites.components.FavoritesTopAppBar
-import com.germainkevin.collapsingtopbar.rememberCollapsingTopBarScrollBehavior
 import com.germainkevin.mystore.utils.NavActions
-import com.germainkevin.mystore.ui.drawer.LeftDrawer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import com.germainkevin.mystore.R
 
 
 @Composable
@@ -32,6 +33,7 @@ fun FavoritesScreen(
     currentRoute: String,
     navActions: NavActions,
     coroutineScope: CoroutineScope,
+    window: Window,
     favoritesViewModel: FavoritesViewModel = hiltViewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
@@ -53,14 +55,14 @@ fun FavoritesScreen(
         topBar = {
             FavoritesTopAppBar(
                 favoriteItems = addedAsFavoriteProducts,
-                navActions,
+                window,
                 openLeftDrawer,
                 scrollBehavior,
             )
         },
         drawerContent = {
             LeftDrawer(
-                allProducts = favoritesViewModel.favoritesScreenState.value.allProducts,
+                products = favoritesViewModel.favoritesScreenState.value.allProducts,
                 currentRoute,
                 navActions,
                 closeLeftDrawer
