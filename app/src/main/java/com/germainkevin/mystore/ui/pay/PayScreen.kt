@@ -1,6 +1,5 @@
 package com.germainkevin.mystore.ui.pay
 
-import android.view.Window
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,20 +16,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.germainkevin.collapsingtopbar.CollapsingTopBar
-import com.germainkevin.collapsingtopbar.CollapsingTopBarDefaults
 import com.germainkevin.collapsingtopbar.rememberCollapsingTopBarScrollBehavior
-import com.germainkevin.mystore.utils.NavActions
 import com.germainkevin.mystore.R
+import com.germainkevin.mystore.utils.NavActions
 
 @Composable
-fun PayScreen(navActions: NavActions, window: Window) {
+fun PayScreen(navActions: NavActions) {
     val scaffoldState = rememberScaffoldState()
 
     val scrollBehavior = rememberCollapsingTopBarScrollBehavior(
@@ -51,12 +48,6 @@ fun PayScreen(navActions: NavActions, window: Window) {
                         color = MaterialTheme.colorScheme.onPrimary
                     )
                 },
-                colors = CollapsingTopBarDefaults.colors(
-                    backgroundColorWhenNotCollapsedOrExpanded = MaterialTheme.colorScheme.onPrimaryContainer,
-                    onBackgroundColorChange = {
-                        window.statusBarColor = it.toArgb()
-                    }
-                ),
                 navigationIcon = {
                     IconButton(onClick = { navActions.navController.navigateUp() }) {
                         Icon(

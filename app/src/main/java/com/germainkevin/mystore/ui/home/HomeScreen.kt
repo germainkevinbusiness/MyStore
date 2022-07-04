@@ -1,11 +1,11 @@
 package com.germainkevin.mystore.ui.home
 
-import android.view.Window
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
+import androidx.compose.material.SnackbarResult
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -27,6 +27,7 @@ import com.germainkevin.mystore.ui.home.components.ProductItem
 import com.germainkevin.mystore.ui.home.components.ProductListCategories
 import com.germainkevin.mystore.utils.NavActions
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -34,7 +35,6 @@ fun HomeScreen(
     currentRoute: String,
     navActions: NavActions,
     coroutineScope: CoroutineScope,
-    window: Window,
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
@@ -107,25 +107,6 @@ fun HomeScreen(
                                 homeViewModel.getProducts(productListCategory = category)
                             })
                     }
-                    //                    else {
-//                        Column(
-//                            modifier = Modifier
-//                                .fillMaxSize()
-//                                .background(MaterialTheme.colorScheme.background)
-//                                .padding(contentPadding),
-//                            verticalArrangement = Arrangement.Center,
-//                            horizontalAlignment = Alignment.CenterHorizontally
-//                        ) {
-//                            Text(
-//                                text = stringResource(id = R.string.error_retrieving_products),
-//                                style = LocalTextStyle.current.copy(
-//                                    color = MaterialTheme.colorScheme.onBackground,
-//                                    fontSize = 18.sp,
-//                                    fontWeight = FontWeight.Normal
-//                                )
-//                            )
-//                        }
-//                    }
                 }
                 items(homeScreenState.products) { product ->
                     ProductItem(modifier = Modifier
@@ -138,11 +119,30 @@ fun HomeScreen(
                                 product = product.copy(addedToCart = it),
                                 productListCategory = homeScreenState.productListCategory,
                             )
+                            coroutineScope.launch {
+                                if (it) {
+                                    val snackBarResult =
+                                        scaffoldState.snackbarHostState.showSnackbar(
+                                            message = context.getString(R.string.added_to_cart),
+                                            actionLabel = "View in cart"
+                                        )
+                                    when (snackBarResult) {
+                                        SnackbarResult.ActionPerformed -> {
+                                            navActions.navigateToCart()
+                                            cancel()
+                                        }
+                                        else -> cancel()
+                                    }
+                                } else {
+                                    scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
+                                    cancel()
+                                }
+                            }
                         },
                         onAddToFavorites = {
                             homeViewModel.updateProduct(
                                 product = product.copy(addedAsFavorite = it),
-                                productListCategory = homeScreenState.productListCategory,
+                                productListCategory = homeScreenState.productListCategory
                             )
                         }
                     )

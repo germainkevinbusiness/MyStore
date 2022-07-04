@@ -1,6 +1,5 @@
 package com.germainkevin.mystore.ui.favorites
 
-import android.view.Window
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -33,7 +32,6 @@ fun FavoritesScreen(
     currentRoute: String,
     navActions: NavActions,
     coroutineScope: CoroutineScope,
-    window: Window,
     favoritesViewModel: FavoritesViewModel = hiltViewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
@@ -55,7 +53,6 @@ fun FavoritesScreen(
         topBar = {
             FavoritesTopAppBar(
                 favoriteItems = addedAsFavoriteProducts,
-                window,
                 openLeftDrawer,
                 scrollBehavior,
             )

@@ -38,8 +38,7 @@ fun AboutScreen(navActions: NavActions, activity: MainActivity) {
         topBar = {
             AboutTopBar(
                 navActions = navActions,
-                scrollBehavior = scrollBehavior,
-                window = activity.window
+                scrollBehavior = scrollBehavior
             )
         },
     ) { contentPadding ->

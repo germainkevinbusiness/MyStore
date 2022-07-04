@@ -1,6 +1,5 @@
 package com.germainkevin.mystore.ui.cart
 
-import android.view.Window
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -31,7 +30,6 @@ import kotlinx.coroutines.launch
 fun CartScreen(
     currentRoute: String,
     navActions: NavActions,
-    window: Window,
     coroutineScope: CoroutineScope,
     cartViewModel: CartViewModel = hiltViewModel()
 ) {
@@ -55,7 +53,6 @@ fun CartScreen(
             CartTopAppBar(
                 itemsInCart = addedToCartProducts,
                 openLeftDrawer = openLeftDrawer,
-                window = window,
                 scrollBehavior = scrollBehavior,
             )
         },
