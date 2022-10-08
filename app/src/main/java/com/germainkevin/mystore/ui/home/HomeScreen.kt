@@ -10,6 +10,7 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -38,7 +39,7 @@ fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
-    val homeScreenState by remember { homeViewModel.homeScreenState }
+    val homeScreenState by homeViewModel.homeScreenState.collectAsState()
     val context = LocalContext.current
     val categoriesMap: Map<ProductListCategory, String> = remember {
         mapOf(
@@ -108,7 +109,10 @@ fun HomeScreen(
                             })
                     }
                 }
-                items(homeScreenState.products) { product ->
+                items(
+                    items = homeScreenState.products,
+                    key = { it.hashCode() }
+                ) { product ->
                     ProductItem(modifier = Modifier
                         .padding(start = 4.dp, end = 4.dp, top = 4.dp, bottom = 12.dp)
                         .fillMaxWidth(),

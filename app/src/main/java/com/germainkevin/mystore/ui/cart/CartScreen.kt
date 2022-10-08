@@ -1,5 +1,6 @@
 package com.germainkevin.mystore.ui.cart
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -26,6 +27,7 @@ import com.germainkevin.mystore.utils.NavActions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CartScreen(
     currentRoute: String,
@@ -90,11 +92,15 @@ fun CartScreen(
                     item {
                         Spacer(modifier = Modifier.height(8.dp))
                     }
-                    items(addedToCartProducts) { product ->
+                    items(
+                        items = addedToCartProducts,
+                        key = { it.hashCode() }
+                    ) { product ->
                         CartProductItem(
                             modifier = Modifier
                                 .padding(start = 4.dp, end = 4.dp, top = 4.dp, bottom = 12.dp)
-                                .fillMaxWidth(),
+                                .fillMaxWidth()
+                                .animateItemPlacement(),
                             product = product,
                             removeFromCart = {
                                 cartViewModel.updateProduct(it)

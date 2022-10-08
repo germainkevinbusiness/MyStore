@@ -2,6 +2,7 @@ package com.germainkevin.mystore.utils
 
 import androidx.navigation.NavHostController
 
+
 object NavRoutes {
     const val ABOUT = "About"
     const val HOME = "Home"
@@ -11,7 +12,6 @@ object NavRoutes {
     const val PAY = "Pay"
     const val SETTINGS = "Settings"
 }
-
 /**
  * Navigate to NavHost composable screens*/
 class NavActions(private val navHostController: NavHostController) {

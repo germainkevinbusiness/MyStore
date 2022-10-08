@@ -53,7 +53,8 @@ fun MyStoreTheme(
         SideEffect {
             (view.context as Activity).window.apply {
                 statusBarColor = colorScheme.primary.toArgb()
-                WindowCompat.getInsetsController(this, view).isAppearanceLightStatusBars = darkTheme
+                WindowCompat.getInsetsController(this, view).isAppearanceLightStatusBars =
+                    darkTheme
             }
         }
     }

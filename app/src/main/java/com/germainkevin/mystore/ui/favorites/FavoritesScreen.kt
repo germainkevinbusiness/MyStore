@@ -1,5 +1,6 @@
 package com.germainkevin.mystore.ui.favorites
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -27,6 +28,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun FavoritesScreen(
     currentRoute: String,
@@ -91,11 +93,15 @@ fun FavoritesScreen(
                     item {
                         Spacer(modifier = Modifier.height(8.dp))
                     }
-                    items(addedAsFavoriteProducts) { product ->
+                    items(
+                        items = addedAsFavoriteProducts,
+                        key = { it.hashCode() }
+                    ) { product ->
                         FavoriteProductItem(
                             modifier = Modifier
                                 .padding(start = 4.dp, end = 4.dp, top = 4.dp, bottom = 12.dp)
-                                .fillMaxWidth(),
+                                .fillMaxWidth()
+                                .animateItemPlacement(),
                             product = product,
                             removeFromFavorites = {
                                 favoritesViewModel.updateProduct(it)
